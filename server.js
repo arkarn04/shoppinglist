@@ -2,15 +2,17 @@ const PORT = process.env.PORT || 5000
 
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const path = require('path');
+const config = require('config');
 
 const items = require('./routes/api/items');
+const users = require('./routes/api/users');
+const auth = require('./routes/api/auth');
 
 const app = express();
 
 // DB Config
-const db = require('./config/keys').mongoURI;
+const db = config.get('mongoURI');
 
 // COnnect to Mongo
 mongoose
@@ -19,9 +21,11 @@ mongoose
     .catch(err => console.log(err));
 
 // Bodyparser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.use('/api/items', items);
+app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 // Serve static assets if in production
 if(process.env.NODE_ENV == 'production') {

@@ -1,3 +1,0 @@
-module.exports = {
-    mongoURI: 'mongodb+srv://arkarn04:user1234@sl0.nodbg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-}
